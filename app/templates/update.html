@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% block content %}
+<center>
+  <h3>📚 Update Information</h3>
+    <div class="col-md-12">
+        {% for row in students %}
+        <form class="form-horizontal" action="/update_info/{{row[0]}}/" method="POST">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">First Name</label>
+            <div class = "col-sm-4">
+              <input name="first_name" value="{{ row[1] }}" type="text" class="form-control" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name</label>
+            <div class = "col-sm-4">
+              <input name="last_name" value="{{ row[2] }}" type="text" class="form-control" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">ID Number</label>
+            <div class = "col-sm-4">
+              <input name="idno" value="{{ row[3] }}" type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="form-g  roup">
+            <label class="col-sm-2 control-label">Year Level</label>
+            <div class = "col-sm-4">
+              <input name="yrlvl" value="{{ row[4] }}" type="number" class="form-control" min="0" max="4" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="form-group">
+          <label class="col-sm-2 control-label">Gender</label>
+          <div class = "col-sm-4">
+            <select class="custom-select" name="gender" required>
+              {%if row[5] == "Male" %}
+              <option value="Male"selected>Male</option>
+              <option value="Female">Female</option>
+              {%elif row[5] == "Female" %}
+              <option value ="Female"selected>Female</option>
+              <option value="Male">Male</option>
+              {%else%}
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              {%endif%}
+            </select>
+          </div>
+        </div>
+        <div id="check"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">College</label>
+          <div class = "col-sm-4">
+            <select data-target="dept_list" class="custom-select course_list selectFilter" name="course" required>
+              {%for courses in course %}
+              {%if courses[0] == row[6]%}
+              <option data-ref="{{courses[1]}}"selected>{{courses[0]}}</option>
+              {%else%}
+              <option data-ref="{{courses[1]}}">{{courses[0]}}</option>
+              {%endif%}
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Department</label>
+          <div class = "col-sm-4">
+            <select data-target="college_list" class="custom-select dept_list selectFilter" name="dept" required>
+              {%for dept in department %}
+              {%if dept[2]== row[7]%}
+              <option data-ref="{{dept[1]}}" data-belong="{{dept[0]}}"selected>{{dept[0]}}</option>
+              {%else%}
+              <option data-ref="{{dept[1]}}" data-belong="{{dept[0]}}">{{dept[0]}}</option>
+              {%endif%}
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Course</label>
+          <div class = "col-sm-4">
+            <select class="custom-select college_list selectFilter" name="college" required>
+              {%for colleges in college %}
+              {%if colleges[0] == row[8] %}
+              <option data-belong="{{colleges[0]}}"selected>{{colleges[0]}}</option>
+              {%else%}
+              <option data-belong="{{colleges[0]}}" >{{colleges[0]}}</option>
+              {%endif%}
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+          <div class="box-footer">
+            <a href="/"><button type="button" class="btn btn-default">Cancel</button></a>
+            <input name="update" type="submit" class="btn btn-dark" value="Update">
+          </div>
+          {% endfor %}
+        </form>
+      </div>
+    </div>
+  </div>
+  <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</center>
+
+{% endblock %}

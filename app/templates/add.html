@@ -1,0 +1,100 @@
+{%extends "layout.html"%}
+{% block content %}
+<center>
+<h3>📝 Add Information</h3>
+<div class="col-md-12">      
+  <form action="{{url_for('add')}}" method="POST">
+        <div class="form-group">
+          <label class="col-sm-2 contentrol-label">First Name</label>
+          <div class = "col-sm-4">
+            <input type="text" class="form-control" name="first_name" placeholder="e.g. Mark" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 contentrol-label">Last Name</label>
+          <div class = "col-sm-4">
+            <input type="text" class="form-control" name="last_name" placeholder="e.g. Cardino" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">ID Number</label>
+          <div class = "col-sm-4">
+            {% if idno == students[3]%}
+            <div class="alert alert-warning" role="alert">
+              ID Number Already Taken! Enter different value
+            </div>
+            <input type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control" name="idno" placeholder="e.g. 0000-0000"  required>
+          </div>
+            {% elif idno != students[3]%}
+           <input type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control" name="idno" placeholder="e.g. 0000-0000"  required>
+          {%endif%}
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Year Level</label>
+          <div class = "col-sm-4">
+            <input type="number" class="form-control" name="yrlvl" placeholder="ex.4" min="0" max="4" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Gender</label>
+          <div class = "col-sm-4">
+            <select class="custom-select" name="gender" required>
+              <option disabled selected>--Choose Gender--</option>
+              <option data-ref="Male">Male</option>
+              <option data-ref="Female">Female</option>
+            </select>
+          </div>
+        </div>
+        <div id="check"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Course</label>
+          <div class = "col-sm-4">
+            <select data-target="dept_list" class="custom-select course_list selectFilter" name="course" required>
+              <option value="" disabled selected>--Choose Course--</option>
+              {%for courses in course %}
+              <option data-ref="{{courses[1]}}">{{courses[0]}}</option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Department</label>
+          <div class = "col-sm-4">
+            <select data-target="college_list" class="custom-select dept_list selectFilter" name="dept" required>
+              <option value="" disabled selected>--Choose Dept--</option>
+              {%for dept in department %}
+               <option data-ref="{{dept[1]}}" data-belong="{{dept[0]}}">{{dept[0]}}</option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">College</label>
+          <div class = "col-sm-4">
+            <select class="custom-select college_list selectFilter" name="college" required>
+              <option value="" disabled selected>--Choose college--</option>
+              {%for colleges in college %}
+              <option data-belong="{{colleges[0]}}" >{{colleges[0]}}</option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="box-footer">
+          <a href="/"><button type="button" class="btn btn-default">Cancel</button></a>
+          <input name="save" type="submit" class="btn btn-dark" value="Save">
+        </div>
+      </form>
+    </thead>
+  </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</center>
+{%endblock%}

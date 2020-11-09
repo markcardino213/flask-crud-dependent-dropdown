@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+<br>
+<div align="right">
+<a href="/course_page/">
+  <button type="button" class="btn btn-dark btn-flat"title="List">📋</button>
+</a>
+<a href="/add/">
+  <button type="button" class="btn btn-dark btn-flat" title="Add information">+ Add New information</button>
+</a>
+</div>
+<center>
+   <section class="content-header">
+    {% for message in get_flashed_messages()%}
+    <div class="alert alert-info alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+      {{ message }}
+    </div>
+    {% endfor%}
+  </section>
+  <br>
+    <div class="body">
+      <div class="container">
+        <input class="form-control mb-4" id="tableSearch" type="text" placeholder="🔍 Type something to search table">
+      <table class="table table-bordered table">
+        <thead class="thead-dark" align="center">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">ID Number</th>
+            <th scope="col">Year Level</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Course</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          {% if students|length == 0 %}
+          <tr>
+            <td>No Data</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          {% else %}
+          <tr>
+            {% for row in students %}
+            <td>{{ row[1] }} {{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[8] }}</td>
+            <td align="center">
+              <a href="/update/{{ row[0]}}">
+                <button type="button" class="btn btn-sm btn-dark btn-flat" title="Update">🖎</button>
+              </a>
+              <a href="/delete_info/{{ row[0]}}">
+                <button type="button" class="btn btn-sm btn-danger btn-flat" title="Delete" onclick="return confirm('Are You Sure To Delete ID Number {{row[3]}}?')">🗙</button>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</center>
+
+{% endblock %}

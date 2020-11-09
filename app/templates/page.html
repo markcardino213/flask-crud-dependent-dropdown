@@ -1,0 +1,44 @@
+{%extends "layout.html"%}
+{% block content %}
+<br>
+<div align="center">
+  <h3>🗂 Course Information</h3>
+</div>
+<br>
+	<a href="/">
+		<button type="button" class="btn btn-dark">⟵</button>
+	</a>
+   <a href="/course_list/">
+    <button type="button" class="btn btn-dark btn-flat">Course List</button>
+  </a>
+</br>
+<br>
+<center>
+    <div class="body">
+    	<div class="container">
+    		<input class="form-control mb-4" id="tableSearch" type="text" placeholder="🔍 Type something to search list....">
+      <table class="table table-bordered table">
+        <thead class="thead-dark" align="center">
+          <tr>
+            <th scope="col">College</th>
+            <th scope="col">Department</th>
+            <th scope="col">Course</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr>
+            {% for row in page %}
+            <td>{{ row[3] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[1] }}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+      </table>
+    </div>
+	</div>
+  </div>
+</center>
+
+
+{% endblock %}
